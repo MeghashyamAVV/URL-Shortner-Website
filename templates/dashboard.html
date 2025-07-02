@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            background-image: url('https://wallpaperaccess.com/full/1567666.png');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #fff;
+        }
+        h1, h2 {
+            color: #00fffb;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #fff;
+        }
+        th {
+            background-color: #007bff;
+        }
+        td {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        a {
+            color: #00fffb;
+            text-decoration: none;
+        }
+        form {
+            max-width: 600px;
+            width: 100%;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            margin-top: auto;
+            text-align: center;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <!-- Display existing URLs -->
+    <table>
+        <thead>
+            <tr>
+                <th>Original URL</th>
+                <th>Short Alias</th>
+                <th>Clicks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for url in urls %}
+            <tr>
+                <td>{{ url.original_url }}</td>
+                <td><a href="{{ url.short_url }}">{{ url.short_url }}</a></td>
+                <td>{{ url.clicks }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Form to add new URL -->
+    <h2>Add New URL</h2>
+    <form action="{{ url_for('shorten_url') }}" method="post">
+        <label for="original_url">Original URL:</label>
+        <input type="text" id="original_url" name="original_url" required>
+        <input type="submit" value="Shorten URL">
+    </form>
+    
+    <!-- Footer -->
+    <footer>
+        &copy; Copyright 2024 by Meghashyam. All Rights Reserved.
+    </footer>
+</body>
+</html>
